@@ -1,7 +1,9 @@
 package br.com.janadev.customer.domain
 
+import java.util.UUID
+
 class Customer(
-    val id: Int,
+    val id: UUID,
     val name: String,
     val email: String,
     val document: String,
