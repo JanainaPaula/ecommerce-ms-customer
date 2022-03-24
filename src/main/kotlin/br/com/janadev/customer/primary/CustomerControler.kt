@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api/customer")
@@ -18,7 +19,7 @@ class CustomerControler(
 ) {
 
     @PostMapping
-    fun createCustomer(@RequestBody customer: NewCustomerDTO): ResponseEntity<CustomerResponseDTO> {
+    fun createCustomer(@Valid @RequestBody customer: NewCustomerDTO): ResponseEntity<CustomerResponseDTO> {
         val customerCreated = customerPort.createCustomer(customer.toModel()).toDTO()
         val uri = ServletUriComponentsBuilder.fromCurrentRequest()
             .path("/{id}").buildAndExpand(customerCreated.id).toUri()
